@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+PHP_EXEC=$(which php)
+CURRENT_DIR=$(pwd)
+cd $(dirname "$0")
+if [ -L "$(basename $0)" ] ; then
+    cd $(dirname $(readlink $(basename "$0") ) )
+fi
+PREVIEWER_DIR=$(pwd -P)
+
+cd "$CURRENT_DIR"
+
+exec "$PHP_EXEC" "$PREVIEWER_DIR/preview_github_readme.php"
