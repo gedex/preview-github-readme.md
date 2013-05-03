@@ -8,6 +8,10 @@
  * Redistributions of files must retain the above copyright notice.
  */
 
+define('APP_NAME',    'preview-github-readme.md');
+define('APP_VERSION', '0.1');
+define('APP_URL',     'https://github.com/gedex/preview-github-readme.md');
+
 $url = 'https://api.github.com/markdown/raw';
 $readme_file = null;
 $base_dir = dirname( __FILE__ );
@@ -69,6 +73,7 @@ curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, file_get_contents($readme_file));
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: text/plain'));
+curl_setopt($ch, CURLOPT_USERAGENT, sprintf('%s v%s %s', APP_NAME, APP_VERSION, APP_URL));
 
 $response = curl_exec($ch);
 curl_close($ch);
